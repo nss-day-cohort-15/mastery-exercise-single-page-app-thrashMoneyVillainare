@@ -1,32 +1,46 @@
-var CarLot = (function () {
+var CarLot = (function (carlot) {
   var inventoryArray = [];
-  return {
-    loadInventory: function (callback) {
-      var xhr = new XMLHttpRequest ();
-      xhr.open("GET", "inventory.json");
-      xhr.addEventListener("load", function(){
-        inventoryArray = JSON.stringify(xhr.responseText)
-        debugger
-        callback(inventoryArray)
-      })
-      xhr.send();
-    }
+
+  carlot.getInventory = function () {
+    return inventoryArray;
   }
-} () )
 
-function populatePage (inventory) {
-  var list = document.querySelector(".list-car-inventory");
-  inventory.forEach(function (cars){
-    list.innerHTML += `<div>${cars}</div>`
-  })
-}
+  carlot.loadInventory = function (callback) {
+    var xhr = new XMLHttpRequest ();
+    xhr.open("GET", "inventory.json");
+    xhr.addEventListener("load", function(){
+      inventoryArray = JSON.parse(xhr.responseText).cars;
+      callback(inventoryArray);
+    });
+    xhr.send();
+    }
+    return carlot;
 
-CarLot.loadInventory(populatePage);
+  })(CarLot || {})
 
 
-// function showCarnivores (carni) {
-//   var list = document.querySelector(".carnivores")
-//   carni.forEach(function (carnivore){
-//     list.innerHTML += `<li>${carnivore}</li>`
-//   })
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var list = document.querySelector(".list-car-inventory");
+// list.addEventListener("click", function (event){
+//   console.log(event, "heard");
