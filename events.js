@@ -3,23 +3,32 @@ var CarLot = (function(carlot){
  carlot.activateEvents = function() {
  var carsOnPage = document.querySelectorAll(".printed-lines");
  var textInput = document.querySelector(".form-control")
-
-    function changeBorder(event){
-    console.log(event.currentTarget.style)
-    event.currentTarget.classList.remove("printed-lines");
-    event.currentTarget.classList.add("clicked-car");
-    event.textInput.innerHTML = "";
-}
-   carsOnPage.forEach(function(carCard){
-    carCard.addEventListener("click", changeBorder)
-   })
-
-
-
-   function selectCar(event) {
-
+   function editDescription() {
+    console.log("event", event.currentTarget)
+    // event.currentTarget.innerHTML = $(".form-control").val()
    }
+
+    function changeBorder(){
+      console.log()
+      event.currentTarget.classList.toggle("clicked-car");
+      textInput.focus();
+    }
+      carsOnPage.forEach(function(carCard){
+      carCard.addEventListener("click", function(event){
+        // console.log(event.currentTarget)
+        changeBorder();
+        editDescription();
+
+
+      })
+    })
   }
   return carlot;
 
 })(CarLot || {})
+
+
+
+// $(".printed-lines").forEach(function(carCard){
+
+// })
